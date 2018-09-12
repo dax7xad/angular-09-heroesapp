@@ -6,12 +6,13 @@
 <div class="row animated fadeIn">
   <div class="col-md-12">
 
-    <form (ngSubmit)="guardar()" #forma="ngForm">
+    <form (ngSubmit)="SaveChanges()" #forma="ngForm">
 
       <div class="form-group">
 
         <label for="nombre">Nombre</label>
-        <input [(ngModel)]="heroe.nombre" class="form-control" type="text" name="nombre" placeholder="nombre del heroe" required>
+        <input [(ngModel)]="heroe.nombre" class="form-control" type="text" name="nombre" placeholder="nombre del heroe"
+          required>
 
       </div>
 

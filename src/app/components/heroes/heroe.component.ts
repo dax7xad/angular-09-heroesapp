@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IHeroe } from '../../interfaces/heroe.interface';
 import { HeroesService } from '../../services/heroes.service';
-import { Router   } from '@angular/router';
+import { Router, ActivatedRoute  } from '@angular/router';
 
 @Component({
   selector: 'app-heroe',
@@ -17,12 +17,35 @@ export class HeroeComponent implements OnInit {
     casa: 'Marvel',
   };
 
-  constructor(private _heroesServie: HeroesService, private router: Router) { }
+  nuevo = true;
+  id: string;
+  constructor(private _heroesServie: HeroesService, private router: Router , private route: ActivatedRoute) {
+    this.route.params
+    .subscribe( p => {
+
+      this.id = p['id'];
+      console.log(p);
+      console.log('params el valor id=', this.id);
+      this.nuevo = (this.id === 'nuevo') ? true : false;
+    });
+  }
 
   ngOnInit() {
   }
 
-  guardar = () => {
+  SaveChanges = () => {
+
+    if (this.nuevo) {
+      // Insertando un nuevo heroe
+      this.PostHeroe();
+    } else {
+      // Modificando un heroe existente
+      this.PutHeroe();
+    }
+
+  }
+
+  PostHeroe = () => {
     console.log(this.heroe);
     this._heroesServie.nuevoheroe( this.heroe )
     .subscribe(data  => {
@@ -30,7 +53,14 @@ export class HeroeComponent implements OnInit {
       this.router.navigate(['/heroe', data ]);
 
     }, error => console.error(error));
+  }
 
+  PutHeroe = () => {
+    console.log('id en el put:', this.id);
+    this._heroesServie.actualizarHeroe( this.heroe, this.id )
+    .subscribe(data  => {
+      console.log(data);
+    }, error => console.error(error));
   }
 
 }
