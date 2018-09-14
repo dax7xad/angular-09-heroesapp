@@ -27,10 +27,22 @@ export class HeroeComponent implements OnInit {
       console.log(p);
       console.log('params el valor id=', this.id);
       this.nuevo = (this.id === 'nuevo') ? true : false;
+
+      if (!this.nuevo) {
+        this.GetHeroe();
+      }
+
     });
   }
 
   ngOnInit() {
+  }
+
+  agregarNuevo(forma: NgForm) {
+    this.router.navigate(['/heroe', 'nuevo']);
+    forma.reset({
+      casa: 'Marvel'
+    });
   }
 
   SaveChanges = () => {
@@ -61,6 +73,13 @@ export class HeroeComponent implements OnInit {
     .subscribe(data  => {
       console.log(data);
     }, error => console.error(error));
+  }
+
+  GetHeroe = () => {
+   this._heroesServie.obtenerHeroe(this.id)
+   .subscribe( response => this.heroe = response, error => {
+      console.error(error);
+   });
   }
 
 }

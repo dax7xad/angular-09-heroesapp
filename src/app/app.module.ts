@@ -16,6 +16,7 @@ import { APP_ROUTING } from './app.routes';
 
 // Servicios
 import { HeroesService } from './services/heroes.service';
+import { KeysPipe } from './pipes/keys.pipe';
 
 
 
@@ -23,7 +24,8 @@ import { HeroesService } from './services/heroes.service';
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroeComponent
+    HeroeComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,

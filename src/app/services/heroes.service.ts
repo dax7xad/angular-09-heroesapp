@@ -40,4 +40,22 @@ export class HeroesService {
     }));
   }
 
+  obtenerHeroe = (key$: string) => {
+    const URL = `${this.heroeURL}${key$}.json`;
+
+    return this.http.get( URL)
+    .pipe(map( res => {
+      return res.json();
+    }));
+  }
+
+  listarHeroe = () => {
+
+
+    return this.http.get( this.heroesURL)
+    .pipe(map( res => {
+      return res.json();
+    }));
+  }
+
 }

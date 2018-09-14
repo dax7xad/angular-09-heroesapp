@@ -1,6 +1,8 @@
 <h3>Héroe <small>Nombre...</small></h3>
 <button [routerLink]="['/heroes']" routerLinkActive="router-link-active" class="btn btn-outline-danger">Regresar</button>
 
+<button type="button" (click)="agregarNuevo(forma)" class="btn btn-outline-success">Nuevo</button>
+
 <hr>
 
 <div class="row animated fadeIn">
@@ -30,6 +32,10 @@
 
         <label for="nombre">Biografia</label>
         <textarea [(ngModel)]="heroe.bio" class="form-control" type="text" name="bio">
+
+
+
+
 
 
 
