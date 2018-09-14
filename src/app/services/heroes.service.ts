@@ -50,9 +50,16 @@ export class HeroesService {
   }
 
   listarHeroe = () => {
-
-
     return this.http.get( this.heroesURL)
+    .pipe(map( res => {
+      return res.json();
+    }));
+  }
+
+  eliminarHeroe = (key$: string) => {
+    const URL = `${this.heroeURL}${key$}.json`;
+
+    return this.http.delete( URL)
     .pipe(map( res => {
       return res.json();
     }));
