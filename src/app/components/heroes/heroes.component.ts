@@ -10,10 +10,13 @@ import { IHeroe } from '../../interfaces/heroe.interface';
 export class HeroesComponent implements OnInit {
 
   heroes: IHeroe[] = [];
-
+  loading = true ;
   constructor(private _serviceHeroe: HeroesService) {
     this._serviceHeroe.listarHeroe()
-    .subscribe(response => this.heroes = response);
+    .subscribe(response => {
+      this.heroes = response;
+      this.loading = false;
+    });
    }
 
   ngOnInit() {
